@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  rephotography:
+    build: ../rephotography
+    container_name: rephotography
+    env_file: ./.env
+    environment:
+      - PORT=${REPHOTO}
+    volumes:
+      - type: bind
+        source: ./Data/input
+        target: /Time-Travel-Rephotography.github.io/input
+      - type: bind
+        source: ./Data/output
+        target: /Time-Travel-Rephotography.github.io/results
+      - type: bind
+        source: ./Data/temp
+        target: /Time-Travel-Rephotography.github.io/temp
+      # - type: bind
+      #   source: ./protos
+      #   target: /Time-Travel-Rephotography.github.io/protos
+    ports:
+      - "${REPHOTO}:${REPHOTO}"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+  deoldify:
+    build: ../deoldify
+    container_name: deoldify
+    env_file: ./.env
+    environment:
+      - PORT=${DEOLDIFY}
+    volumes:
+      - type: bind
+        source: ./Data/input
+        target: /DeOldify/input
+      - type: bind
+        source: ./Data/output
+        target: /DeOldify/results
+    ports:
+      - "${DEOLDIFY}:${DEOLDIFY}"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
