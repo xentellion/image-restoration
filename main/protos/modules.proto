@@ -1,0 +1,18 @@
+syntax = "proto3";
+package module;
+
+service Module {
+    rpc SimSwapImage (ModuleRequest) returns (ModuleReply) {}
+    rpc SimSwapVideo (ModuleRequest) returns (ModuleReply) {}
+    rpc GhostImage (ModuleRequest) returns (ModuleReply) {}
+    rpc GhostVideo (ModuleRequest) returns (ModuleReply) {}
+}
+
+message ModuleRequest {
+    bool isMultiple = 1;
+    string text = 2;
+}
+
+message ModuleReply {
+    string message = 1;
+}
