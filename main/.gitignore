@@ -1,9 +1,3 @@
 # Ignore all data
-Data/input/*
-!Data/input/.gitkeep
-
-Data/output/*
-!Data/output/.gitkeep
-
-Data/temp/*
-!Data/temp/.gitkeep
+Data/**/*
+!Data/**/.gitkeep
